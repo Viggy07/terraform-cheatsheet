@@ -10,10 +10,22 @@ variable "no_of_webservers" {
 }
 
 variable "tags" {
-  description = "A map of tags to add to all resources"
   type        = map(string)
   default     = {
     Terraform = "true"
     webserver = "true"
   }
+  description = "A map of tags to add to all resources"
+}
+
+variable "webserver_ingress_cidr" {
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+  description = "cide from where the webserver will be accessible"
+}
+
+variable "ec2_deletion_protection" {
+  type        = bool
+  default     = true
+  description = "Specifies weather the ec2 instance should have deletion protection"
 }
