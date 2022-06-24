@@ -3,7 +3,7 @@ module "efs_datasync" {
 
   for_each = local.envs
 
-  tenant_name                 = "${each.value["tenant_name"]}"
+  tenant_name                 = lookup(each.value, "tenant_name", "${data.aws_db_instance.source[each.key].address}")
   env                         = "${each.value["env"]}"
   tags                        = var.tags
 }
