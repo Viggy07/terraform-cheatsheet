@@ -30,3 +30,33 @@ variable "ec2_deletion_protection" {
   default     = true
   description = "Specifies weather the ec2 instance should have deletion protection"
 }
+
+variable "node_groups" {
+  type = any
+  default = {
+    ng-default = {
+      name             = "r5-default"
+      subnet_ids       = []
+      desired_capacity = 4
+      max_size         = 6
+      min_size         = 2
+      instance_type    = "r5.large"
+      disk_size        = 20
+      remote_access    = true
+      ng_tags = {
+        "Terraform" = "true"
+      }
+    }
+  }
+  description = "The list of maps of NodeGroups"
+}
+
+variable "map_roles" {
+  type = list(object({
+    rolearn  = string
+    username = string
+    groups   = list(string)
+  }))
+  default = []
+  description = "Additional IAM roles to add to the aws-auth configmap."
+}
