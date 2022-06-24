@@ -1,6 +1,7 @@
 variable "vpc_name" {
   type    = string
   default = "webserver-vpc"
+  description = "name of the vpc to be created"
 }
 
 variable "no_of_webservers" {
